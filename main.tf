@@ -1,13 +1,14 @@
 module "label" {
-  source      = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.17.0"
-  namespace   = var.namespace
-  stage       = var.stage
-  environment = var.environment
-  name        = var.name
-  attributes  = var.attributes
-  delimiter   = var.delimiter
-  tags        = var.tags
+  source             = "git::https://github.com/Callumccr/tf-mod-label.git?ref=master"
+  namespace          = var.namespace
+  environment        = var.environment
+  name               = var.name
+  attributes         = concat(var.attributes, [""])
+  delimiter          = "-"
+  additional_tag_map = {} /* Additional attributes (e.g. 1) */
+  label_order        = ["environment", "namespace", "name", "attributes"]
 }
+
 
 locals {
   public_key_filename = format(
